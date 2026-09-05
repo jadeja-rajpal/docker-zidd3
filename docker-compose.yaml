@@ -1,0 +1,35 @@
+version: '2.2'
+
+services:
+
+  web:
+    image: nginx:latest
+    container_name: nginx-web
+
+    ports:
+      - "8080:80"
+
+    networks:
+      - mynet
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+
+    environment:
+      MYSQL_ROOT_PASSWORD: secret123
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - dbdata:/var/lib/mysql
+
+    networks:
+      - mynet
+
+networks:
+  mynet:
+
+volumes:
+  dbdata:
+
